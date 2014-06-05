@@ -1,0 +1,45 @@
+<div class="row">
+	<div class="span7">
+		<img src="/assets/logo-big.gif" />
+	</div>
+	<div class="span5">
+		<h1 style="color:red">Warning:</h1>
+		<p style="color:red">This site still under construction. The version will most likely be outdated and progress has been made since I last updated. The purpose of this current site is for prospecting employers to see some rails dev. Sign up is disabled but just shoot me a email at dew.boms.llc@gmail.com and I will happily give you a guest sign in. Since this site is under construction there will be many features and styling that are not working/not complete</p>
+	</div>
+</div>
+
+<div class="row">
+	<div class="span12">
+		<p>Welcome to Kaljaa, a social network designed specifically for the beer industry and culture. This is the home page is from our first beta/trial launch but the site is currently being rebuilt so styling and features are most likely going to not work.  <strike>Please feel welcome to sign up, review some beers, check out some news articles, blog, and invite your friends to join so you all can share the beers you love.<a href="/learn">Learn more.</a></strike></p>
+	</div>
+</div>
+
+<h2>Our 5 Profile Types:</h2>
+<div class="row">
+	<div class="span3">
+		<h3>Brewery</h3>
+		<p>This includes all licensed Breweries, Micro-Breweries, and Craft Brewers. If you're brewing beer and have a license then this is the profile for you.</p>
+		<%= link_to "Create Profile", signup_path(type: "brewery"), class: "btn btn-small btn-primary"  %>
+	</div>
+	<div class="span3">
+		<h3>Social</h3>
+		<p>If you just plain enjoy beer then this profile type is for you.</p>
+		<%= link_to "Create Profile", signup_path(type: "social"), class: "btn btn-small btn-primary"  %>
+	</div>
+	<div class="span2">
+		<h3>Media</h3>
+		<p>If you're a critic or run any form of media/website that reports on the brewing industry then this is your profile type.</p>
+		<%= link_to "Create Profile", signup_path(type: "media"), class: "btn btn-small btn-primary"  %>
+	</div>
+	<div class="span2">
+		<h3>Supplier/ Distributor</h3>
+		<p>If you supply materials, provide services, or distribute brewed goods then sign up here!</p>
+		<%= link_to "Create Profile", signup_path(type: "instry"), class: "btn btn-small btn-primary"  %>
+	</div>
+	<div class="span2">
+		<h3>Restaruant/ Retailor</h3>
+		<p>If your a store, restaurant, or other beer selling establishment then this profile is for you.</p>
+		<%= link_to "Create Profile", signup_path(type: "vendor"), class: "btn btn-small btn-primary"  %>
+	</div>
+
+</div>

@@ -1,0 +1,4 @@
+class AddIndexToInterests < ActiveRecord::Migration
+  def change
+  end
+end

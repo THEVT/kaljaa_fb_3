@@ -1,0 +1,2 @@
+$('div.x').attr('id', 'y')
+$("#reviewbeer_votes").html('<%= @reviewbeer.reputation_for(:votes).to_i %>')

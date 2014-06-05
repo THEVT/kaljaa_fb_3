@@ -1,0 +1,11 @@
+class ReviewbeersBeers < ActiveRecord::Migration
+  def up
+	create_table :reviewbeers_beers, :id => false do |t|
+		t.references :reviewbeer, :null => false
+		t.references :beer, :null => false
+	end
+  end
+
+  def down
+  end
+end

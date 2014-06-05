@@ -1,0 +1,2 @@
+
+$("#reviewbeer_votes<%= @reviewbeer.id%>").html('<%= @reviewbeer.reputation_for(:votes).to_i %>')

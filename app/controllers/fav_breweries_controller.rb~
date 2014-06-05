@@ -1,0 +1,65 @@
+class FavBreweriesController < ApplicationController
+
+before_filter :signed_in_user 
+	before_filter :correct_user,   only: [:edit, :update]
+	#before_filter :admin_user,     only: [:edit, :update]
+	respond_to :json, :html, :xml, :js
+	
+	def index
+	end
+
+	def show
+		
+		@fav_brewery= FavBrewery.find(params[:id])
+		@account_id= @fav_brewery.account_id
+		@account = Account.find(@account_id)
+
+	end
+
+	def create
+		@profile= current_user.profile
+		@fav_brewery = @profile.build_fav_brewery(params[:fav_brewery])
+		if @fav_brewery.save
+			flash[:success] = "Favorite Breweries Updated!"
+			redirect_to @profile
+		else
+			render 'profiles/show'
+		end
+	end
+
+	def edit
+		@fav_brewery= FavBrewery.find(params[:id])
+	end
+
+	def update
+		@fav_brewery= Activity.find(params[:id])
+		if @fav_brewery.update_attributes(params[:fav_brewery])
+			flash[:success] = "Favorite Breweries updated"
+			respond_with @profile
+
+		else
+			render @profile
+		end
+	end
+
+	def info
+	end
+
+	private
+
+	def correct_user
+
+		#finds fav_brewery then matches profile_id to Profile then matches matches account_id to Account then asks if its current user 
+		@fav_brewery_id= fav_brewery.find(params[:id])
+		@profile_id = @fav_brewery_id.profile_id
+		@profile = Profile.find(@profile_id)
+		@account_id= @profile.account_id
+		@account = Account.find(@account_id)
+		redirect_to(@profile) unless current_user?(@account)
+	end
+
+	def admin_user
+		redirect_to(root_path) unless current_user.admin?
+	end
+
+end

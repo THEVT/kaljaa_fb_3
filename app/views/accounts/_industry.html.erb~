@@ -1,0 +1,63 @@
+<h1>Supplier/Distributor Profile:</h1>
+
+<div class="row">
+	<div class="span8">
+		<p>Welcome to Kaljaa! Kaljaa is a social network designed to cater to every aspect of the beer and brewing industry. This site is made to benefit every industry business with both business and consumer relationships, providing: networking, news, blogs, beer releases and reviews, as well as helping you gain exposure to potential customers.</p>
+		
+		<p>When you subscribe you receive a profile page for your brewery, through which you have access to the whole of Kaljaa. Tools provided on your profile allow you to get up to date news about other suppliers and distributors, breweries, media critics, vendors, and beer consumers. This site brings all your networking needs into one place.</p>
+		
+		<p>Kaljaa is also dedicated to promoting the beer industry as a whole, and introducing new people to the variety and depth of beer. Your membership helps support this effort.</p>
+	</div>
+	<div class="span1">
+	</div>
+	<div class="span3">
+		<h3>Sign-up</h3>
+		<%= form_for(@account) do |f| %>
+			<%= render 'shared/error_messages', object: f.object %>
+
+			<%= f.label :email, "Email (Also Username)" %>
+			<%= f.text_field :email %>
+
+			<%= f.label :password %>
+			<%= f.password_field :password %>
+
+			<%= f.label :password_confirmation, "Confirmation" %>
+			<%= f.password_field :password_confirmation %>
+
+			<%= f.fields_for :profile do |p| %>
+
+				<%= p.label :company, "Company Name" %>
+				<%= p.text_field :company %>
+
+				<%= p.label :website, "Company Website" %>
+				<%= p.text_field :website %>
+
+				<%= p.label :email, "Company Email" %>
+				<%= p.text_field :email %>				
+
+				<%= p.label :phone, "Company Phone" %>
+				<%= p.text_field :phone %>
+
+				<%= p.label :street, "Address" %>
+				<%= p.text_field :street %>
+
+				<%= p.label :city, "City" %>
+				<%= p.text_field :city %>
+
+				<%= p.label :state, 'State:' %>	
+				<%= p.select :state, states%>
+
+				<%= p.label :zipcode, "Zip Code" %>
+				<%= p.text_field :zipcode %>
+			<% end %>
+
+			<%= f.radio_button :authorization, "1"%>
+			<%= f.label :authorization_terms, "I agree to the Terms of service" %>
+
+			<%= f.hidden_field :ty, value: @type  %>
+
+			<%= f.submit "Create my account"%>
+		<% end %>
+	</div>
+
+</div>

@@ -1,0 +1,15 @@
+<%= link_to "Back to the Homepage", root_path %>
+
+<% if @type == 'brewery' %>
+	<%= render 'brewery' %>
+<% elsif @type == 'social' %>
+	<%= render 'social' %>
+<% elsif @type == 'media' %>
+	<%= render 'media' %>
+<% elsif @type == 'industry' %>
+	<%= render 'industry' %>
+<% elsif @type == 'vendor' %>
+	<%= render 'vendor' %>
+<% else %>
+	<h2>Oops! Somthing must of screwed up</h2>
+<% end %>

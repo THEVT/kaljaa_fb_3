@@ -1,0 +1,5 @@
+
+<li>
+	<%= link_to "view photo", album_photo_path(photo.id) %>
+	<%= link_to image_tag(photo.photo.url(:medium)), photo_path(photo.id) %>
+</li>

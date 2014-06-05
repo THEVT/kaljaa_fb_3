@@ -1,0 +1,4 @@
+class AddCreatorToInvites < ActiveRecord::Migration
+  def change
+  end
+end

@@ -1,0 +1,12 @@
+<%= form_for :conversation, url: :conversations do |f| %>
+	<%= f.label :recipients %>
+	<%= f.text_field :recipients %>
+	<%= f.label :subject %>
+	<%= f.text_field :subject %>
+	<%= f.label :body %>
+	<%= f.text_area :body %>
+	<%= f.button :submit%>
+	<%= submit_tag 'Cancel', type: :reset%>
+
+<% end %>
+

@@ -1,0 +1,1 @@
+<!--$("#beers_display").html("<%= escape_javascript(render @beers) %>");

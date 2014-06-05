@@ -1,0 +1,4 @@
+class AddIndexToServices < ActiveRecord::Migration
+  def change
+  end
+end

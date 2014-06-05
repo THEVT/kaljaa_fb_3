@@ -1,0 +1,4 @@
+class AddIndexToLocations < ActiveRecord::Migration
+  def change
+  end
+end

@@ -1,0 +1,4 @@
+class AddIndexToBeers < ActiveRecord::Migration
+  def change
+  end
+end

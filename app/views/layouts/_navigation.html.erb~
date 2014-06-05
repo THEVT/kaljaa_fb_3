@@ -1,0 +1,77 @@
+<% if signed_in? %>
+
+	<header class="navbar navbar-fixed-top navbar-inverse">
+		<div class="navbar-inner" id="navbar-inner">
+			<div class="container">
+				<%= link_to image_tag('/assets/logo.png'), 'home#', id: "logo" %>
+				<nav>
+					<ul class="nav pull-right" id="header_links">
+						<li><%= link_to "Home", current_user %></li>
+						<li><%= link_to "Profile", profile_path(current_profile) %></li>
+						<li><%= link_to "Profiles", profiles_path %></li>
+						<li><%= link_to "Friends", accounts_path %></li>
+						<li><%= link_to "Messages", m_home_path %></li>
+						<li class="dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+							Centrals <b class="caret"></b>
+							</a>
+							<ul class="dropdown-menu">
+								<li><%= link_to "Central Home", "#" %></li>
+								<li><%= link_to "Blog Central", blogs_path %></li>
+								<li><%= link_to "News Central", articles_path %></li>
+								<li><%= link_to "Beer Central", beercentrals_path %></li>
+							</ul>
+						</li>
+						<li><%= link_to "Events", events_path %></li>
+						<li><%= link_to "Groups", groups_path %></li>
+						<li><a class="nav_link" href="/search/?query=">Search</a></li>
+						<li id="fat-menu" class="dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+							Account <b class="caret"></b>
+							</a>
+							<ul class="dropdown-menu">
+								<li><%= link_to "Settings", edit_account_path(current_user) %></li>
+								<li><%= link_to "AccountSettings", '#' %></li>
+								<li><%= link_to "Privacy Settings", '#' %></li>
+								<li class="divider"></li>
+								<li>
+								<%= link_to "Sign out", signout_path, method: "delete" %>
+								</li>
+								<li class="divider"></li>
+								<li><%= link_to "Help", '#' %></li>
+							</ul>
+						</li>
+					</ul>
+				</nav>
+			</div>
+			<div class="header_accent"></div>
+		</div>
+	</header>
+<% else %>
+	<header class="navbar navbar-fixed-top navbar-inverse">
+		<div class="navbar-inner" id="navbar-inner">
+			<div class="container">
+				<%= link_to image_tag('/assets/logo.png'), :root, id: "logo" %>
+				<nav>
+					<ul class="nav pull-right" id="header_links">
+						<li><%= link_to "Blogs", blogs_path %></li>
+						<li><%= link_to "News", articles_path %></li>
+						<li><%= link_to "Beers", beercentrals_path %></li>
+						<li>
+							<%= form_for(:session, url: sessions_path, :html => { :class => "form-inline", :class => "navbar-form pull-right"}) do |f| %>
+
+							<%= f.text_field :email, placeholder: "Email" %>
+
+							<%= f.password_field :password, placeholder: "Password", :class => "span3" %>
+
+							<%= f.submit "Sign in", class: "btn btn-default" %>
+							<% end %>
+						</li>
+
+					</ul>
+				</nav>
+			</div>
+			<div class="header_accent"></div>
+		</div>
+	</header>
+<% end %>

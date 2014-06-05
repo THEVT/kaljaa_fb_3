@@ -1,0 +1,124 @@
+class HomeController < ApplicationController
+	def index
+		@title = "Kaljaa"
+		#@account = Account.new
+		#@account.remember_me =  !cookies[:remember].nil?
+	end
+
+	def copyright
+	end
+
+	def faq
+	end
+
+	def learn
+	end
+
+	def privacy
+	end
+
+	def support
+	end
+
+	def terms
+	end
+
+	def register
+ 
+		if(params[:type].nil?)
+			#TODO: Validate against whitelist
+			missing_page("Invalid request")
+			return
+		end
+		@account = Account.new
+		if request.post?
+			#@account.ty = params[:type]
+			@account.email = params[:email]
+			@account.password = params[:password]
+			@account.password_confirmation = params[:password_conf]
+			@account.terms_agreed = params[:terms].nil? ? false : params[:terms]
+			if @account.ty != "social" or @account.ty != "media"
+				@account.enabled = 0
+			end
+			
+			if @account.save#validate_recap(params, @account.errors) and @account.save
+				@profile = Profile.new
+				@profile.id = @account.id
+				case(@account.ty)
+					when "social"
+						@profile.s1 = json_safe params[:fname]
+						@profile.s2 = json_safe params[:lname]
+					when "brewery"
+						@profile.s1 = json_safe params[:name]
+						@profile.s2 = params[:permit]
+					when "media"
+						@profile.s1 = json_safe params[:fname]
+						@profile.s2 = json_safe params[:lname]
+						@profile.s6 = json_safe params[:org]
+					when "industry"
+						@profile.s1 = json_safe params[:name]
+					when "vendor"
+						@profile.s1 = json_safe params[:name]
+				end
+				
+				@profile.s3 = json_safe params[:city]
+				@profile.s4 = json_safe params[:state]
+				@profile.s5 = json_safe params[:zip]
+				@profile.wall = Wall.create!(:account_id => @account.id)
+				@profile.save!
+				set_user(@account)
+				@user.act "'%U just joined Kaljaa!'", Action::PLAIN
+				
+				#Friendship.request(Account.find(2), @user)
+				
+				#redirect_to :controller => :account
+				return
+			end
+		end 
+		render params[:type]
+	end
+
+	def login
+		render :layout => "home", :partial => "home/flows/login/login"
+	end
+	
+	#Logs the user into the site.
+	def authenticate
+		@account = Account.new(:email => params[:email], :password => params[:password], :remember_me => params[:remember_me])
+		account = Account.find_by_email_and_pw(@account.email, @account.get_password)
+		if account
+			set_user account
+			@account.remember_me == "1" ? remember_user : forget_user
+			redirect_to_forwarding_url
+		else
+			render :layout => "home", :partial => "home/flows/login/login"
+		end
+	end
+
+	def reset
+		if request.post? and params[:email]
+			Account.find_by_email(params[:email]).reset_password
+			redirect_to "home#index"
+			return
+		end
+		render :layout => "home", :partial => "home/flows/login/reset"
+	end
+	
+private
+	def collect_static
+		@stylesheets = ['common', 'public']
+		@javascript = ['Client', 'Kaljaa']
+		@title = "Kaljaa"
+		@slogan = "Beta"
+	end
+	def redirect_to_forwarding_url
+		if cookies[:protected_page] != nil
+			url = cookies[:protected_page]
+			cookies.delete(:protected_page)
+			redirect_to url
+		else
+			redirect_to "/account"
+		end
+	end
+ 
+end

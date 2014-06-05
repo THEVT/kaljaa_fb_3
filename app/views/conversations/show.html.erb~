@@ -1,0 +1,14 @@
+<%= link_to "View All Conversations", conversations_path %>
+
+<h3>Subject: <%= conversation.subject %></h3>
+
+<%= content_tag_for(:li, conversation.receipts_for(current_profile)) do |receipt| %>
+	<%  message = receipt.message %>
+	<% #@profile_id= message.sender_id %>
+	<% @profile = Profile.find(message.sender_id) %>
+	<%= @profile.s1 %>
+	<%= message.subject %> <br>
+	<%= message.body %>
+<% end %>
+
+	<%= render 'messages/form', conversation: conversation %>

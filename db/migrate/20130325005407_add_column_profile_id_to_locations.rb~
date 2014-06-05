@@ -1,0 +1,4 @@
+class AddColumnProfileIdToLocations < ActiveRecord::Migration
+  def change
+  end
+end

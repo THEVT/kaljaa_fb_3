@@ -1,0 +1,27 @@
+<div class="row spacer">
+</div>
+<h4>Activities</h4>
+<div class= "row border"></div>
+<% if current_user.admin? || current_user?(@account) %>
+	<%if !Activity.exists?(profile_id: @profile.id) %>
+		<%= form_for(@activity) do |f| %>
+		  <%= render 'shared/error_messages', object: f.object %>
+		    <%= f.text_area :content, placeholder: "Add some activities..." %>
+		  <%= f.submit "Add Activities", class: "btn"%>
+		<% end %>
+	<% else %>
+		<p>
+			<%= best_in_place @profile.activity, :content, type: :textarea %>
+		</p>
+
+		<%= link_to 'Edit Activities',  edit_activity_path(@activity_present) %>
+	<% end %>
+
+<% else %>
+
+	<p>
+		<%= @profile.activity.content %>
+	</p>
+
+
+<% end %>

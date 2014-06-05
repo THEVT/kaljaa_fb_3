@@ -1,0 +1,53 @@
+class ActivitesController < ApplicationController
+
+	before_filter :signed_in_user 
+	before_filter :correct_user,   only: [:edit, :update]
+	#before_filter :admin_user,     only: [:edit, :update]
+	respond_to :json, :html, :xml, :js
+	
+	def index
+	end
+
+	def show
+		
+		@profile= Profile.find(params[:id])
+		@account_id= @profile.account_id
+		@account = Account.find(@account_id)
+
+	end
+
+	def create
+	end
+
+	def edit
+		@profile= Profile.find(params[:id])
+	end
+
+	def update
+		@profile= Profile.find(params[:id])
+		if @profile.update_attributes(params[:profile])
+			flash[:success] = "Profile updated"
+			respond_with @profile
+
+		else
+			render 'edit'
+		end
+	end
+
+	def info
+	end
+
+	private
+
+	def correct_user
+		@profile= Profile.find(params[:id])
+		@account_id= @profile.account_id
+		@account = Account.find(@account_id)
+		redirect_to(@profile) unless current_user?(@account)
+	end
+
+	def admin_user
+		redirect_to(root_path) unless current_user.admin?
+	end
+
+end

@@ -1,0 +1,28 @@
+
+<h4>About</h4>
+<div class= "row border"></div>
+<% if current_user.admin? || current_user?(@account) %>
+	<%if !About.exists?(profile_id: @profile.id) %>
+		<%= form_for(@about) do |f| %>
+		  <%= render 'shared/error_messages', object: f.object %>
+		    <%= f.text_area :content, placeholder: "Add some abouts..." %>
+		  <%= f.submit "Add About", class: "btn" %>
+		<% end %>
+	<% else %>
+		<%= best_in_place @profile.about, :content, type: :textarea %>
+		<p>
+			<%= simple_format(@profile.about.content) %>
+		</p>
+
+	<%= link_to 'Edit About',  edit_about_path(@about_present) %>
+	<% end %>
+
+<% else %>
+
+	<p>
+		<b>About:</b>
+		<%= simple_format(@profile.about.content) %>
+	</p>
+
+
+<% end %>

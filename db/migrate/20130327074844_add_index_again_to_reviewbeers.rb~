@@ -1,0 +1,4 @@
+class AddIndexAgainToReviewbeers < ActiveRecord::Migration
+  def change
+  end
+end

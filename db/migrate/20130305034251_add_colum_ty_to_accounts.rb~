@@ -1,0 +1,4 @@
+class AddColumTyToAccounts < ActiveRecord::Migration
+  def change
+  end
+end

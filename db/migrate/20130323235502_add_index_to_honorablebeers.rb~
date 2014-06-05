@@ -1,0 +1,4 @@
+class AddIndexToHonorablebeers < ActiveRecord::Migration
+  def change
+  end
+end

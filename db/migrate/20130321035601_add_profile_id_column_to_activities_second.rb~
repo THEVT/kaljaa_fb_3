@@ -1,0 +1,4 @@
+class AddProfileIdColumnToActivitiesSecond < ActiveRecord::Migration
+  def change
+  end
+end

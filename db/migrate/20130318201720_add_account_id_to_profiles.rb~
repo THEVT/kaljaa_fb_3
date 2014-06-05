@@ -1,0 +1,6 @@
+class AddAccountIdToProfiles < ActiveRecord::Migration
+  def change
+    add_column :profiles, :account_id, :integer
+  end
+	add_index :profiles, [:account_id, :created_at]
+end

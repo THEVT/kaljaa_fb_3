@@ -1,0 +1,14 @@
+class AccountController < ApplicationController
+	def new
+	end
+	
+	def register
+		render params[:type]
+	end
+
+	def show
+		@user= Account.find(params[:id])
+	end
+		
+
+end

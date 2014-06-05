@@ -1,0 +1,4 @@
+class AddIndexToMiscs < ActiveRecord::Migration
+  def change
+  end
+end

@@ -1,0 +1,41 @@
+<%= link_to "Start New Blog", new_blog_path %>
+
+<h1>Blogs</h1>
+
+<%= search_form_for @blog_search do |f| %>
+  <%= f.label :title_cont %>
+  <%= f.text_field :title_cont %>
+  <%= f.submit %>
+<% end %>
+
+<p>
+  Sort by:
+  <%= sort_link (@blog_search :title "Product Name") %> |
+  <%= sort_link (@blog_search :created_at "Created At") %> 
+</p>
+
+<ul class="list_3_12">
+<% @blog_search_result.each do |blog| %>
+	<li>
+	<%= link_to blog.title, blog %> <br>
+	<%= blog.profile.s1 %>
+	Posted <%= time_ago_in_words(blog.created_at) %> ago.
+
+	</li>
+<% end %>
+</ul>
+
+<%= will_paginate %>
+
+<ul class="list_3_12">
+<% @blogs.each do |blog| %>
+	<li>
+	<%= link_to blog.title, blog %> <br>
+	<%= blog.profile.s1 %>
+	Posted <%= time_ago_in_words(blog.created_at) %> ago.
+
+	</li>
+<% end %>
+</ul>
+
+<%= will_paginate %>

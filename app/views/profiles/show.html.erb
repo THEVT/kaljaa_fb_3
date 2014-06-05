@@ -1,0 +1,121 @@
+<div class="row">
+	<div class="span2">
+		<p>Yo Yo<p>
+		<p><%= @profile.profile_type %></p>
+		<%= @profile.first_name %>
+		<%= @profile.last_name %>
+		<p></p>
+		<ul>
+		<li><%= friendship_status(current_profile, @profile) %>
+		  <% unless Friendship.exists?(current_profile, @profile) %>
+			<br />
+			<%= link_to "Request friendship with #{@profile.first_name}", friendships_path(:friend_id => @profile), :method => :post, confirm: "Send friend request to #{@profile.first_name}?" %>
+			 <% end %>
+		 </li>
+		</ul>
+
+		<%= link_to "Photos", profile_albums_path(@profile) %>
+	</div>
+	<div class="span8">
+		<% if @profile.profile_type == "social" %>
+			<h2><%= @profile.first_name %> <%= @profile.last_name %></h2>
+			<h4><%= @profile.profile_type.capitalize %> Profile</h4>
+		<% else %>
+			<h2><%= @profile.company %></h2>
+			<h5><%= @profile.profile_type.capitalize %> Profile</h5>
+		<% end %>		
+		<ul class="nav nav-tabs">
+			<li class="active"><a href="#Info" data-toggle="tab">Info</a></li>
+			<% if @profile.profile_type != "social" %>		
+				<li><a href="#About_Info" data-toggle="tab">About</a></li>
+			<% end %>
+			<% if @profile.profile_type == ("vendor" || "industry") %>
+				<li><a href="#Services" data-toggle="tab">Services</a></li>
+			<% end %>
+			<% if @profile.profile_type == ("social" || "media") %>
+				<li><a href="#Beer" data-toggle="tab">Beers</a></li>
+			<% end %>
+			<% if @profile.profile_type == "brewery" %>
+				<li><a href="#Beers" data-toggle="tab">Beer</a></li>
+			<% end %>
+			<% if @profile.profile_type == ("social" || "media") %>
+				<li><a href="#Reviews" data-toggle="tab">Reviews</a></li>
+			<% end %>
+				<li><a href="#Blogs" data-toggle="tab">Blogs</a></li>
+				<li><a href="#News" data-toggle="tab">News</a></li>
+			<% if @profile.profile_type != "social" %>
+				<li><a href="#Events" data-toggle="tab">Events</a></li>
+			<% end %>
+			<li><a href="#Misc" data-toggle="tab">Misc</a></li>
+		</ul>
+
+		<div class="tab-content">
+			<div class="tab-pane active" id="Info">
+				<%= render 'info' %>
+
+				<%= render 'activities/activity' %>
+
+				<%= render 'interests/interest' %>
+			</div>
+			<div class="tab-pane" id="About_Info">
+		
+				<%= render 'abouts/about' %>
+
+				<%= render 'locations/maps' %>
+
+				<%= render 'locations/location' %>
+			</div>
+			<div class="tab-pane" id="Services">
+				<%= render 'services/service' %>
+			</div>
+			<div class="tab-pane" id="Beer">
+				<%= render 'favbreweries/favbrewery' %>
+
+				<%= render 'favbeers/favbeer' %>
+
+				<%= render 'honorablebeers/honorablebeer' %>
+			</div>
+			<div class="tab-pane" id="Beers">
+
+				<h2 id="dark"><b><%= @profile.company %> Beers</b></h2>
+
+				<%= render 'beers/beer_form' %>
+		
+				<%= render 'beers/show' %>
+			</div>
+			<div class="tab-pane" id="Reviews">
+				<p>Hello </p>
+
+				<%= link_to 'Add Beer Review',  new_reviewbeer_path %>
+
+				<%= render 'reviewbeers/reviewbeer_quick_form' %>
+		
+				<%= render 'reviewbeers/reviews' %>
+			</div>
+			<div class="tab-pane" id="Blogs">
+				<%= link_to 'Start New Blog',  new_blog_path %>
+
+				<%= render 'blogs/blogs' %>
+			</div>
+			<div class="tab-pane" id="News">
+				<%= link_to 'Start News Artcile',  new_article_path %>
+
+				<%= render 'articles/articles' %>
+			</div>
+			<div class="tab-pane" id="Events">
+				<%= link_to 'Create Event',  new_event_path %>
+
+				<%= render 'events/events' %>
+
+				<%= render 'events/calendar' %>
+			</div>
+			<div class="tab-pane" id="Misc">
+				<%= render 'miscs/misc' %>	
+			</div>
+		</div>
+	</div>
+	<div class="span2">
+	</div>
+</div>
+
+

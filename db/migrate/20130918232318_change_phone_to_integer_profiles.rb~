@@ -1,0 +1,7 @@
+class ChangePhoneToIntegerProfiles < ActiveRecord::Migration
+  def up
+  end
+
+  def down
+  end
+end

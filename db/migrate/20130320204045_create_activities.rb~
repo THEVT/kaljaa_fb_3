@@ -1,0 +1,11 @@
+class CreateActivities < ActiveRecord::Migration
+  def change
+    create_table :activities do |t|
+      t.text :content
+      t.integer :account_id
+
+      t.timestamps
+    end
+	add_index :microposts, [:account_id, :created_at]
+  end
+end

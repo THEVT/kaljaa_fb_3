@@ -1,0 +1,4 @@
+class AddColumnToFriendships < ActiveRecord::Migration
+  def change
+  end
+end
